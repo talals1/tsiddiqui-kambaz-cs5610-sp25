@@ -268,7 +268,7 @@ export default function Lab1() {
           </form>
           <h4>Anchor tag</h4>
           Please <a href="https://www.lipsum.com" id="wd-lipsum">click here</a> to get dummy text<br/>
-          Here is the <a href="https://github.com/talals1/tsiddiqui-kambaz-cs5610-sp25" id="wd-github">GitHub repository</a> for this code.<br/>
+          Here is the <a href="https://github.com/talals1/tsiddiqui-kambaz-cs5610-sp25" id="wd-github">GitHub repository</a> for this assignment.<br/>
         </div>
       </div>
     );
