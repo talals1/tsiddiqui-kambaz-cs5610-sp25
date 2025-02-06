@@ -1,106 +1,88 @@
+import { Col, Form, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
+
 export default function AssignmentEditor() {
-  return (
-    <div id="wd-assignments-editor">
-      <label htmlFor="wd-name">Assignment Name</label>
-      <input id="wd-name" value="A1 - ENV + HTML" /><br /><br />
-      <textarea id="wd-description">
-      The assignment is available online Submit a link to the landing page of
-      </textarea>
-      <br />
-        <table>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-points">Points</label>
-            </td>
-            <td>
-              <input id="wd-points" value={100} />
-            </td>
-          </tr>
+    return (
+        <div id="wd-assignments-editor">
+
+            <FormGroup className="mb-3">
+                <FormLabel>Assignment Name</FormLabel>
+                <FormControl />
+            </FormGroup>
+
+            <FormGroup className="mb-3" controlId="wd-textarea">
+                <FormLabel>Description</FormLabel>
+                <FormControl as="textarea" rows={3} />
+            </FormGroup>
+
+            <FormGroup as={Row} className="mb-3">
+                <FormLabel column sm={2}>
+                    Points
+                </FormLabel>
+                <Col sm={10}>
+                    <FormControl />
+                </Col>
+            </FormGroup>
+
+            <FormGroup as={Row} className="mb-3">
+                <FormLabel column sm={2}>
+                    Assignment Group
+                </FormLabel>
+                <Col sm={10}>
+                    <FormSelect>
+                        <option selected>ASSIGNMENTS</option>
+                    </FormSelect>
+                </Col>
+            </FormGroup>
+
+            <FormGroup as={Row} className="mb-3">
+                <FormLabel column sm={2}>
+                    Display Grade as
+                </FormLabel>
+                <Col sm={10}>
+                    <FormSelect>
+                        <option selected>Percentage</option>
+                        <option>Points</option>
+                    </FormSelect>
+                </Col>
+            </FormGroup>
+
+            <FormGroup as={Row} className="mb-3">
+                <FormLabel column sm={2}>
+                    Submission Type
+                </FormLabel>
+                <Col sm={10}>
+                    <Form.Check type="radio" label="Text Entry"
+                        checked name="formHorizontalRadios" />
+                    <Form.Check type="radio" label="Website URL"
+                        name="formHorizontalRadios" />
+                    <Form.Check type="radio" label="Media Recording"
+                        name="formHorizontalRadios" />
+                    <Form.Check type="radio" label="Student Annotation"
+                        name="formHorizontalRadios" />
+                    <Form.Check type="radio" label="File Upload"
+                        name="formHorizontalRadios" />
+                </Col>
+            </FormGroup>
+
+            <FormGroup as={Row} className="mb-3">
+                <FormLabel column sm={2}>
+                    Available From
+                </FormLabel>
+                <Col sm={10}>
+                    <FormControl type="date"/>
+                </Col>
+            </FormGroup>
+
+            <FormGroup as={Row} className="mb-3">
+                <FormLabel column sm={2}>
+                    Available Until
+                </FormLabel>
+                <Col sm={10}>
+                    <FormControl type="date"/>
+                </Col>
+            </FormGroup>
 
 
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-group">Group</label>
-            </td>
-            <td>
-              <input id="wd-group" value="All"/>
-            </td>
-          </tr>
-          
-          
-          <tr>
-            <td>
-              <label htmlFor="wd-display-grade-as">Display Grade as</label>
-            </td>
-            <td>          
-              <select id="wd-display-grade-as">
-                <option selected value="pct">Percentage</option>
-                <option value="points">Points</option>
-              </select>
-            </td>
-          </tr>
-
-
-          <tr>
-            <td>
-              <label id="wd-submission-type">Submission Type</label>
-            </td>
-            <td>
-              <input type="radio" name="submission-type" id="wd-text-entry"/>
-              <label htmlFor="wd-text-entry">Text Entry</label><br />
-
-              <input type="radio" name="submission-type" id="wd-website-url"/>
-              <label htmlFor="wd-website-url">Website URL</label><br />
-              
-              <input type="radio" name="submission-type" id="wd-media-recordings"/>
-              <label htmlFor="wd-media-recordings">Media Recording</label><br />
-
-              <input type="radio" name="submission-type" id="wd-student-annotation"/>
-              <label htmlFor="wd-student-annotation">Student Annotation</label><br />
-
-              <input type="radio" name="submission-type" id="wd-file-upload"/>
-              <label htmlFor="wd-file-upload">File Upload</label>
-            </td>
-          </tr>
-
-
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-assign-to">Assign To</label>
-            </td>
-            <td>
-              <input id="wd-assign-to" value="All Students"/>
-            </td>
-          </tr>
-
-
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-available-from">Available From</label>
-            </td>
-            <td>
-            <input type="date"
-                   value="2025-01-21" 
-                   id="wd-available-from"/><br/>
-            </td>
-          </tr>
-
-          
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-available-until">Available Until</label>
-            </td>
-            <td>
-            <input type="date"
-                   value="2025-01-30" 
-                   id="wd-available-until"/><br/>
-            </td>
-          </tr>
-
-
-        
-        {/* Complete on your own */}
-      </table>
-    </div>
-  );
+        </div>
+    );
 }    
