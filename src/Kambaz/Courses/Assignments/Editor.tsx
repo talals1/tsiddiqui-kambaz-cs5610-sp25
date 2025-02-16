@@ -1,17 +1,25 @@
-import { Col, Form, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
+import { Card, Col, Form, FormControl, FormGroup, FormLabel, FormSelect, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+
+import * as db from "../../Database"
 
 export default function AssignmentEditor() {
+    const { aid } = useParams();
+
+    const { assignments } = db;
+    const asn = assignments.find(a => a._id === aid);
+
     return (
-        <div id="wd-assignments-editor">
+        <div id="wd-assignments-editor" >
 
             <FormGroup className="mb-3">
                 <FormLabel>Assignment Name</FormLabel>
-                <FormControl />
+                <FormControl value={asn?.title} />
             </FormGroup>
 
             <FormGroup className="mb-3" controlId="wd-textarea">
                 <FormLabel>Description</FormLabel>
-                <FormControl as="textarea" rows={3} />
+                <FormControl as="textarea" rows={3} value={asn?.description} />
             </FormGroup>
 
             <FormGroup as={Row} className="mb-3">
@@ -19,7 +27,7 @@ export default function AssignmentEditor() {
                     Points
                 </FormLabel>
                 <Col sm={10}>
-                    <FormControl />
+                    <FormControl value={asn?.points} />
                 </Col>
             </FormGroup>
 
@@ -64,24 +72,37 @@ export default function AssignmentEditor() {
                 </Col>
             </FormGroup>
 
-            <FormGroup as={Row} className="mb-3">
-                <FormLabel column sm={2}>
-                    Available From
-                </FormLabel>
-                <Col sm={10}>
-                    <FormControl type="date"/>
-                </Col>
-            </FormGroup>
+            <Card>
+                <Card.Body>
+                    <Card.Title>Dates</Card.Title>
+                    <FormGroup as={Row} className="mb-3">
+                        <FormLabel column sm={2}>
+                            Available From
+                        </FormLabel>
+                        <Col sm={10}>
+                            <FormControl type="date" value={asn?.availableFrom} />
+                        </Col>
+                    </FormGroup>
 
-            <FormGroup as={Row} className="mb-3">
-                <FormLabel column sm={2}>
-                    Available Until
-                </FormLabel>
-                <Col sm={10}>
-                    <FormControl type="date"/>
-                </Col>
-            </FormGroup>
+                    <FormGroup as={Row} className="mb-3">
+                        <FormLabel column sm={2}>
+                            Available Until
+                        </FormLabel>
+                        <Col sm={10}>
+                            <FormControl type="date" value={asn?.availableUntil} />
+                        </Col>
+                    </FormGroup>
 
+                    <FormGroup as={Row} className="mb-3">
+                        <FormLabel column sm={2}>
+                            Due Date
+                        </FormLabel>
+                        <Col sm={10}>
+                            <FormControl type="date" />
+                        </Col>
+                    </FormGroup>
+                </Card.Body>
+            </Card>
 
         </div>
     );

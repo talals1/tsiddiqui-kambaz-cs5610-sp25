@@ -1,0 +1,34 @@
+[
+  {
+    "id": "CS1234 React JS",
+    "name": "Full Stack software developer"
+  },
+  {
+    "id": "SOCL1101",
+    "name": "Introduction to Sociology"
+  },
+  {
+    "id": "JRNL1150",
+    "name": "Understanding Today's News"
+  },
+  {
+    "id": "CS5610",
+    "name": "Web Development"
+  },
+  {
+    "id": "CS5330",
+    "name": "Pattern Recognition & Computer Vision"
+  },
+  {
+    "id": "CS6200",
+    "name": "Information Retrieval"
+  },
+  {
+    "id": "CS6120",
+    "name": "Natural Language Processing"
+  },
+  {
+    "id": "CS4520",
+    "name": "Mobile App Dev"
+  }
+]

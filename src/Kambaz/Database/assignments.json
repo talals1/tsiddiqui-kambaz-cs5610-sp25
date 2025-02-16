@@ -1,0 +1,83 @@
+[
+  {
+    "_id": "A101",
+    "title": "Propulsion Assignment",
+    "course": "RS101",
+    "points": 40,
+    "description": "Design a propulsion system for an imaginary engine.",
+    "availableFrom": "2025-09-06",
+    "availableUntil": "2025-10-05"
+  },
+  {
+    "_id": "A102",
+    "title": "Combustion Analysis",
+    "course": "RS101",
+    "points": 20,
+    "description": "Analyze the combustion process in the RS-25 engine, which was used to power the Space Shuttle.",
+    "availableFrom": "2025-10-06",
+    "availableUntil": "2025-11-05"
+  },
+  {
+    "_id": "A103",
+    "title": "Nozzle Design Project",
+    "course": "RS101",
+    "points": 30,
+    "description": "In a group for 2-3, design a novel engine nozzle for an imaginary space launch vehicle.",
+    "availableFrom": "2025-11-06",
+    "availableUntil": "2025-12-05"
+  },
+  {
+    "_id": "A201",
+    "title": "What Sociology Means to You",
+    "course": "RS102",
+    "points": 20,
+    "description": "In 800 words, explain your preliminary understanding of sociology and what does it mean to study society.",
+    "availableFrom": "2025-09-06",
+    "availableUntil": "2025-10-05"
+  },
+  {
+    "_id": "A202",
+    "title": "Your Sociological Imagination",
+    "course": "RS102",
+    "points": 10,
+    "description": "Utilize C. Wright Mills' idea of the \"sociological imagination\" to identify one way in which the our individual experience affects societal institutions and vice versa. Examples including voting and the resultant effects of presidency, how experience adults affects choosing school curriculums, etc.",
+    "availableFrom": "2025-10-06",
+    "availableUntil": "2025-11-05"
+  },
+  {
+    "_id": "A203",
+    "title": "Analyzing Roles in Society",
+    "course": "RS102",
+    "points": 50,
+    "description": "Analyze a role we take on in society (being a parent, sibling, worker, manager, president, etc.) and explain it's societal effects.",
+    "availableFrom": "2025-11-06",
+    "availableUntil": "2025-12-05"
+  },
+  {
+    "_id": "A301",
+    "title": "Inspecting the Impact of Social Media",
+    "course": "RS103",
+    "points": 30,
+    "description": "Inspect how social media has changed the way newsrooms choose what to report on.",
+    "availableFrom": "2025-09-06",
+    "availableUntil": "2025-10-05"
+  },
+  {
+    "_id": "A302",
+    "title": "Investigative Reporting Project",
+    "course": "RS103",
+    "points": 10,
+    "description": "For a topic of your liking, act like an investigative journalist and do a deep-dive to show how things may not always be how they seem. For example, you could analyze the marketing done by the food industry to show how popular snacks are healthy, while in reality, recent studies of their ingredients show the truth about ultra-processed food.",
+    "availableFrom": "2025-10-06",
+    "availableUntil": "2025-11-05"
+  },
+  {
+    "_id": "A303",
+    "title": "Final Project: Analyzing Coverage of a Notable Event",
+    "course": "RS103",
+    "points": 25,
+    "description": "Choose a popular historical event (Occupy Wall Street, the COVID-19 pandemic, Y2K, etc.) and analyze how the media at the time covered it. Include different perspectives from differnet news outlets, and point out any discrepencies between the coverage and the popular opinion of people.",
+    "availableFrom": "2025-11-06",
+    "availableUntil": "2025-12-05"
+  }
+]
