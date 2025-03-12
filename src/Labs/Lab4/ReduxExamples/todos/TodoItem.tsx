@@ -1,0 +1,25 @@
+import { Button, ListGroup } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { deleteTodo, setTodo } from "./todosReducer";
+
+export default function TodoItem(
+    { todo }: {
+        todo: { id: string; title: string };
+    }) {
+    // { todo, deleteTodo, setTodo }: {
+    // todo: { id: string; title: string };
+    // deleteTodo: (id: string) => void;
+    // setTodo: (todo: { id: string; title: string }) => void;}) {
+    const dispatch = useDispatch();
+    return (
+        <ListGroup.Item key={todo.id}>
+            {/* <Button onClick={() => deleteTodo(todo.id)} */}
+            <Button onClick={() => dispatch(deleteTodo(todo.id))}
+                variant="danger"
+                id="wd-delete-todo-click"> Delete </Button>
+            {/* <Button onClick={() => setTodo(todo)} */}
+            <Button onClick={() => dispatch(setTodo(todo))}
+                id="wd-set-todo-click"> Edit </Button>
+            {todo.title}    </ListGroup.Item>
+    );
+}
