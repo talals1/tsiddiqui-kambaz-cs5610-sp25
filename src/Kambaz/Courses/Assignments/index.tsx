@@ -74,7 +74,10 @@ export default function Assignments() {
             ASSIGNMENTS
             (40% of Total)
             {/* TODO maybe create an AssignmentsControlButtons instead of using the modules one */}
-            <ModuleControlButtons />
+            <ModuleControlButtons
+              moduleId={""}
+              deleteModule={(_moduleId: string) => void console.log("I'm just here so I don't get fined")}
+              editModule={(_moduleId: string) => void console.log("I'm just here so I don't get fined")} />
           </div>
           <ListGroup className="wd-lessons rounded-0">
 
@@ -104,7 +107,7 @@ export default function Assignments() {
 
       <DeleteAssignmentModal
         show={show} handleClose={handleClose}
-        assignmentName={currAssignmentName} asnId={currAsnId} 
+        assignmentName={currAssignmentName} asnId={currAsnId}
         deleteAssignment={(asnId: any) => { dispatch(deleteAssignment(asnId)) }} />
     </div>
   );
