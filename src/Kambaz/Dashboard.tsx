@@ -52,7 +52,7 @@ export default function Dashboard() {
             console.log([c, isEnrolled])
             return [c, isEnrolled]
           }).
-            filter(([c, isEnrolled]: [any, boolean]) => isEnrolled || showAllCourses).
+            filter(([_c, isEnrolled]: [any, boolean]) => isEnrolled || showAllCourses).
             map(([c, isEnrolled]: [any, boolean]) => (
 
               <Col className="wd-dashboard-course" style={{ width: "350px" }}>
