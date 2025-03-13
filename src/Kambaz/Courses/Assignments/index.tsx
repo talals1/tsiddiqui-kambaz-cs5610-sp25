@@ -1,4 +1,4 @@
-import { Button, Col, FormControl, InputGroup, ListGroup, Modal, Row, Stack } from "react-bootstrap";
+import { Button, Col, FormControl, InputGroup, ListGroup, Row, Stack } from "react-bootstrap";
 import { BsGripVertical } from "react-icons/bs";
 import ModuleControlButtons from "../Modules/ModuleControlButtons";
 import LessonControlButtons from "../Modules/LessonControlButtons";
@@ -38,7 +38,8 @@ export default function Assignments() {
 
   function getFormattedDate(dateString: string) {
     // Source: https://stackoverflow.com/questions/3552461/how-do-i-format-a-date-in-javascript
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    // Learned how to specify type for https://stackoverflow.com/questions/66590691/typescript-type-string-is-not-assignable-to-type-numeric-2-digit-in-d
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", options)
   }
