@@ -17,6 +17,12 @@ export default function Labs() {
           <p>
             Here is the <a href="https://github.com/talals1/tsiddiqui-kambaz-cs5610-sp25" id="wd-github">GitHub repository</a> for this assigment.<br/>
           </p>
+          <p>
+            For convenience, here is ones of the accounts for the Kambaz part. <br/> 
+            username: ada<br/> 
+            password: 123<br/> <br/> 
+            More accounts can be found in "src\Kambaz\Database\users.json" of the repo. <br/>
+          </p>
           <TOC />
           <Routes>
             <Route path="/" element={<Navigate to="Lab1" />} />

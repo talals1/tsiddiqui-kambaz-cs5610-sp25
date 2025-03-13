@@ -9,5 +9,8 @@
     { "_id": "8", "user": "890", "course": "RS102" },
     { "_id": "9", "user": "123", "course": "RS102" },
     { "_id": "10", "user": "101", "course": "RS102" },
-    { "_id": "11", "user": "101", "course": "RS103" }
+    { "_id": "11", "user": "101", "course": "RS103" },
+    { "_id": "12", "user": "777", "course": "RS101" },
+    { "_id": "13", "user": "777", "course": "RS102" },
+    { "_id": "14", "user": "777", "course": "RS103" }
 ]
