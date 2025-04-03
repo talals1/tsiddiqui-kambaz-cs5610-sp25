@@ -24,10 +24,10 @@ export default function Profile() {
     dispatch(setCurrentUser(null));
     navigate("/Kambaz/Account/Signin");
   };
-  const handleRoleChange = (newRole: string) => {
-    setProfile({...profile, role: newRole});
 
-  }
+  // const handleRoleChange = (newRole: string) => {
+  //   setProfile({...profile, role: newRole});
+  // }
 
   useEffect(() => { fetchProfile(); }, []);
 

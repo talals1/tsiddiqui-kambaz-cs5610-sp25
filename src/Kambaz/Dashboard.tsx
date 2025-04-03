@@ -2,7 +2,7 @@ import { Row, Col, Card, Button, FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addCourse, deleteCourse, updateCourse } from "./Courses/reducer";
+import { addCourse, updateCourse } from "./Courses/reducer";
 import { useEffect, useState } from "react";
 
 import * as userClient from "./Account/client";
@@ -42,7 +42,7 @@ export default function Dashboard() {
   };
 
   const deleteCourse = async (courseId: string) => {
-    const status = await courseClient.deleteCourse(courseId);
+    await courseClient.deleteCourse(courseId);
     setCourses(courses.filter((course) => course._id !== courseId));
   };
 
@@ -56,14 +56,14 @@ export default function Dashboard() {
   };
 
   const joinCourse = async (cid: string) => {
-    const status = await userClient.enrollUser(cid);
+    await userClient.enrollUser(cid);
     const courseBeingJoined = unenrolledCourses.find((c) => c._id === cid)
     setCourses([...courses, courseBeingJoined]);
     setUnenrolledCourses(unenrolledCourses.filter((c) => c._id !== cid))
   }
 
   const leaveCourse = async (cid: string) => {
-    const status = await userClient.unenrollUser(cid);
+    await userClient.unenrollUser(cid);
     const courseBeingLeft = courses.find((c) => c._id === cid)
     setCourses(courses.filter((c) => c._id !== cid));
     setUnenrolledCourses([...unenrolledCourses, courseBeingLeft])
