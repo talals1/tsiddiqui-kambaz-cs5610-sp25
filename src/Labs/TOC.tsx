@@ -40,7 +40,13 @@ export default function TOC() {
         <Nav.Link as={Link} to="/Kambaz">Kambaz</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="https://github.com/talals1/tsiddiqui-kambaz-cs5610-sp25">My GitHub</Nav.Link>
+        <Nav.Link href="https://github.com/talals1/tsiddiqui-kambaz-cs5610-sp25">Frontend Repo</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="https://github.com/talals1/tsiddiqui-server-cs5610-sp25">Backend Repo</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="https://tsiddiqui-server-cs5610-sp25.onrender.com">Backend on Render.com</Nav.Link>
       </Nav.Item>
     </Nav>
   );
