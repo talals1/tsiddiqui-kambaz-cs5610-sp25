@@ -8,10 +8,12 @@ import { FaMagnifyingGlass, FaTrash } from "react-icons/fa6";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { deleteAssignment } from "./reducer";
-import { useState } from "react";
+import { deleteAssignment, setAssignments } from "./reducer";
+import { useEffect, useState } from "react";
 import DeleteAssignmentModal from "../../Account/DeleteAssignmentModal";
 
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
 
 export default function Assignments() {
   const dispatch = useDispatch();
@@ -36,6 +38,7 @@ export default function Assignments() {
     handleShow();
   }
 
+
   function getFormattedDate(dateString: string) {
     // Source: https://stackoverflow.com/questions/3552461/how-do-i-format-a-date-in-javascript
     // Learned how to specify type for https://stackoverflow.com/questions/66590691/typescript-type-string-is-not-assignable-to-type-numeric-2-digit-in-d
@@ -43,6 +46,20 @@ export default function Assignments() {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", options)
   }
+
+  const fetchAssignments = async () => {
+    const assignments = await coursesClient.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+
+  const removeAssignment = async (asnId: string) => {
+    await assignmentsClient.deleteAssignment(asnId);
+    dispatch(deleteAssignment(asnId))
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
 
   return (
     <div id="wd-assignments">
@@ -108,7 +125,10 @@ export default function Assignments() {
       <DeleteAssignmentModal
         show={show} handleClose={handleClose}
         assignmentName={currAssignmentName} asnId={currAsnId}
-        deleteAssignment={(asnId: any) => { dispatch(deleteAssignment(asnId)) }} />
+        deleteAssignment={(asnId: any) => {
+          removeAssignment(asnId);
+          // dispatch(deleteAssignment(asnId))
+        }} />
     </div>
   );
 }
