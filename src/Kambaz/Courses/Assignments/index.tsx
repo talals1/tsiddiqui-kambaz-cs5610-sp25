@@ -16,17 +16,18 @@ import * as coursesClient from "../client";
 import * as assignmentsClient from "./client";
 
 export default function Assignments() {
+  const { cid } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { cid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [currAssignmentName, setCurrAssignmentName] = useState('');
   const [currAsnId, setCurrAsnId] = useState('');
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleCreateAssignment = () => {
     navigate(`/Kambaz/Courses/${cid}/Assignments/newAssignment`);
@@ -38,15 +39,6 @@ export default function Assignments() {
     handleShow();
   }
 
-
-  function getFormattedDate(dateString: string) {
-    // Source: https://stackoverflow.com/questions/3552461/how-do-i-format-a-date-in-javascript
-    // Learned how to specify type for https://stackoverflow.com/questions/66590691/typescript-type-string-is-not-assignable-to-type-numeric-2-digit-in-d
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", options)
-  }
-
   const fetchAssignments = async () => {
     const assignments = await coursesClient.findAssignmentsForCourse(cid as string);
     dispatch(setAssignments(assignments));
@@ -56,6 +48,15 @@ export default function Assignments() {
     await assignmentsClient.deleteAssignment(asnId);
     dispatch(deleteAssignment(asnId))
   };
+
+
+  function getFormattedDate(dateString: string) {
+    // Source: https://stackoverflow.com/questions/3552461/how-do-i-format-a-date-in-javascript
+    // Learned how to specify type for https://stackoverflow.com/questions/66590691/typescript-type-string-is-not-assignable-to-type-numeric-2-digit-in-d
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options)
+  }
 
   useEffect(() => {
     fetchAssignments();
@@ -71,15 +72,17 @@ export default function Assignments() {
             <FormControl id="wd-search-assignment" type="email" placeholder="Search..." className="wd-grid-col-third-page fa" />
           </InputGroup>
         </Col>
-        <Col xs={8}>
-          <Button variant="secondary" size="lg" className="me-1 float-end" id="wd-add-assignment-group">
-            + Group
-          </Button>
-          <Button variant="danger" size="lg" className="me-1 float-end" id="wd-add-assignment"
-            onClick={() => handleCreateAssignment()}>
-            + Assignment
-          </Button>
-        </Col>
+        {currentUser.role !== "STUDENT" &&
+          <Col xs={8}>
+            <Button variant="secondary" size="lg" className="me-1 float-end" id="wd-add-assignment-group">
+              + Group
+            </Button>
+            <Button variant="danger" size="lg" className="me-1 float-end" id="wd-add-assignment"
+              onClick={() => handleCreateAssignment()}>
+              + Assignment
+            </Button>
+          </Col>
+        }
       </Row>
 
       <br /><br />
@@ -105,9 +108,13 @@ export default function Assignments() {
                   <Stack direction="horizontal">
                     <BsGripVertical className="me-2 fs-3" />
                     <MdEditNote className="me-2 fs-3" color="green" />
-                    <FaTrash className="text-danger me-2 mb-1" onClick={() => handleDeleteAssignment(asn.title, asn._id)} />
+                    {currentUser.role !== "STUDENT" &&
+                      <FaTrash className="text-danger me-2 mb-1"
+                        onClick={() => handleDeleteAssignment(asn.title, asn._id)} />
+                    }
                     <Stack>
-                      <a href={`#/Kambaz/Courses/${cid}/Assignments/${asn._id}`} className="wd-assignment-link" >
+                      <a href={`#/Kambaz/Courses/${cid}/Assignments/${asn._id}/${currentUser.role === "STUDENT" ? "view" : ""}`}
+                        className="wd-assignment-link" >
                         {asn.title}
                       </a>
                       {/* <div style={{ "color": "gray" }}><b>Due</b> Wednesday, January 22nd 2025 at 11:59pm</div> */}

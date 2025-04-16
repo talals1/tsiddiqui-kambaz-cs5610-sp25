@@ -6,8 +6,8 @@ const accountSlice = createSlice({
     name: "account",
     initialState,
     reducers: {
-        setCurrentUser: (state, action) => {
-            state.currentUser = action.payload;
+        setCurrentUser: (state, { payload: user }) => {
+            state.currentUser = user;
         },
     },
 });

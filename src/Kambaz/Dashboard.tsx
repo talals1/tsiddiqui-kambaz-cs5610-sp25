@@ -11,13 +11,8 @@ import * as courseClient from "./Courses/client";
 export default function Dashboard() {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-
   const [course, setCourse] = useState({ _id: '', name: '', description: '', enrolled: true });
-  const [showAllCourses, setShowAllCourses] = useState(false);
-
   const [courses, setCourses] = useState<any[]>([]);
-  const [unenrolledCourses, setUnenrolledCourses] = useState<any[]>([]);
-
   const [enrolling, setEnrolling] = useState<boolean>(false);
 
   const findCoursesForUser = async () => {
@@ -85,20 +80,6 @@ export default function Dashboard() {
     }))
   };
 
-  const joinCourse = async (cid: string) => {
-    await userClient.enrollUser(cid);
-    const courseBeingJoined = unenrolledCourses.find((c) => c._id === cid)
-    setCourses([...courses, courseBeingJoined]);
-    setUnenrolledCourses(unenrolledCourses.filter((c) => c._id !== cid))
-  }
-
-  const leaveCourse = async (cid: string) => {
-    await userClient.unenrollUser(cid);
-    const courseBeingLeft = courses.find((c) => c._id === cid)
-    setCourses(courses.filter((c) => c._id !== cid));
-    setUnenrolledCourses([...unenrolledCourses, courseBeingLeft])
-  }
-
   useEffect(() => {
     if (enrolling) {
       fetchCourses();
@@ -145,7 +126,6 @@ export default function Dashboard() {
 
         <Row xs={1} md={5} className="g-4">
           {courses.map((c: any) => (
-
             <Col className="wd-dashboard-course" style={{ width: "350px" }}>
               <Card>
                 <Card.Img src="/images/reactjs.png" variant="top" width="100%" height={160} />
@@ -156,24 +136,22 @@ export default function Dashboard() {
                   <Card.Text className="wd-dashboard-course-description overflow-hidden" style={{ height: "100px" }}>
                     {c.description} </Card.Text>
 
-                  {!enrolling ?
-
-                    <Link to={`/Kambaz/Courses/${c._id}/Home`}
+                  {!enrolling
+                    ?
+                    (<Link to={`/Kambaz/Courses/${c._id}/Home`}
                       className="wd-dashboard-course-link text-decoration-none text-light" >
                       <Button className="me-2" variant="primary">
                         Go
                       </Button>
-
-                    </Link>
+                    </Link>)
                     :
-                    <Link to={c.enrolled ? `/Kambaz/Courses/${c._id}/Home` : `/Kambaz/Dashboard`}
+                    (<Link to={c.enrolled ? `/Kambaz/Courses/${c._id}/Home` : `/Kambaz/Dashboard`}
                       className="wd-dashboard-course-link text-decoration-none text-light" >
                       <Button className="me-2" variant="primary">
                         Go
                       </Button>
-                    </Link>
+                    </Link>)
                   }
-
 
                   {enrolling && (
                     <button className={`btn ${c.enrolled ? "btn-danger" : "btn-success"}`}
@@ -185,54 +163,35 @@ export default function Dashboard() {
                     </button>
                   )}
 
-                  {/* <Button className="me-2" variant="danger"
-                    onClick={() => {
-                      leaveCourse(c._id)
-                      // dispatch(deleteEnrollment(findEnrollmentId(c._id))
-                    }}>
-                    Unenroll
-                  </Button> */}
-
-                  {/* {isEnrolled &&
-                      <Button className="me-2" variant="danger"
-                        onClick={() => dispatch(deleteEnrollment(findEnrollmentId(c._id)))}>
-                        Unenroll
-                      </Button>}
-
-                    {!isEnrolled &&
-                      <Button className="me-2" variant="success"
-                        onClick={() => dispatch(addEnrollment({ user: currentUser._id, course: c._id }))}>
-                        Enroll
-                      </Button>} */}
-
                   {(currentUser.role === "ADMIN" || currentUser.role === "FACULTY") &&
-                    <Button onClick={(event) => {
-                      event.preventDefault();
-                      deleteCourse(c._id);
-                      // This function below is for the Redux/reducer deleteCourse
-                      // dispatch(deleteCourse(c._id));
-                    }} className="btn btn-danger float-end me-2"
-                      id="wd-delete-course-click">
-                      Delete
-                    </Button>
-                  }
-
-                  {(currentUser.role === "ADMIN" || currentUser.role === "FACULTY") &&
-                    <Button id="wd-edit-course-click"
-                      onClick={(event) => {
+                    <>
+                      <Button onClick={(event) => {
                         event.preventDefault();
-                        setCourse(c)
-                      }}
-                      className="btn btn-warning me-2 float-end" >
-                      Edit
-                    </Button>
+                        deleteCourse(c._id);
+                        // This function below is for the Redux/reducer deleteCourse
+                        // dispatch(deleteCourse(c._id));
+                      }} className="btn btn-danger float-end me-2"
+                        id="wd-delete-course-click">
+                        Delete
+                      </Button >
+
+                      <Button id="wd-edit-course-click"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setCourse(c)
+                        }}
+                        className="btn btn-warning me-2 float-end" >
+                        Edit
+                      </Button>
+                    </>
                   }
+
                 </Card.Body>
               </Card>
             </Col>
           ))}
         </Row>
       </div>
-    </div>
+    </div >
   );
 }
