@@ -6,7 +6,7 @@ import Courses from "./Courses";
 
 import "./styles.css";
 import ProtectedRoute from "./Account/ProtectedRoute";
-import CourseProtectedRoute from "./Account/CourseProtectedRoute";
+// import CourseProtectedRoute from "./Account/CourseProtectedRoute";
 import Session from "./Account/Session";
 
 export default function Kambaz() {

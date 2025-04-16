@@ -26,12 +26,6 @@ export default function Modules() {
     dispatch(setModules(modules));
   };
 
-  const createModuleForCourse = async () => {
-    if (!cid) return;
-    const newModule = { name: moduleName, course: cid };
-    const module = await coursesClient.createModuleForCourse(cid, newModule);
-    dispatch(addModule(module));
-  }
 
   const addModuleHandler = async () => {
     const newModule = await coursesClient.createModuleForCourse(cid!, {
@@ -70,16 +64,10 @@ export default function Modules() {
         setModuleName={setModuleName}
         moduleName={moduleName}
         addModule={addModuleHandler}
-      // addModule={() => {
-      //   createModuleForCourse()
-      //   // dispatch(addModule({ name: moduleName, course: cid }));
-      //   // setModuleName("");
-      // }} 
       />
       <br /><br /><br /><br />
       <ul id="wd-modules" className="list-group rounded-0">
         {modules
-          // .filter((module: any) => module.course === cid)
           .map((module: any) => (
             <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
               <div className="wd-title p-3 ps-2 bg-secondary">
@@ -89,14 +77,10 @@ export default function Modules() {
                   <FormControl className="w-50 d-inline-block"
                     onChange={(e) =>
                       saveModule({ ...module, name: e.target.value })
-                      // dispatch(
-                      //   updateModule({ ...module, name: e.target.value })
-                      // )
                     }
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
                         saveModule({ ...module, editing: false });
-                        // dispatch(updateModule({ ...module, editing: false }));
                       }
                     }}
                     defaultValue={module.name} />
@@ -104,7 +88,6 @@ export default function Modules() {
                 <ModuleControlButtons moduleId={module._id}
                   deleteModule={(moduleId) => {
                     removeModule(moduleId);
-                    // dispatch(deleteModule(moduleId));
                   }}
                   editModule={(moduleId) => { dispatch(editModule(moduleId)) }}
                 />

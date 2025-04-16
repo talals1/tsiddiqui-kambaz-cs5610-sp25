@@ -14,6 +14,7 @@ export default function Labs() {
       <div className="container-fluid">
         <div id="wd-labs">
           <h1>Labs</h1>
+          <h2>Thanks for an awesome semester! :)</h2>
           <h2>Talal Siddiqui</h2>
           <p>
             Here is the <a href="https://github.com/talals1/tsiddiqui-kambaz-cs5610-sp25" id="wd-github">GitHub repository</a> for this assigment.<br/>
