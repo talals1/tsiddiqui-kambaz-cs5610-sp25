@@ -18,8 +18,8 @@ export default function Modules() {
   const { cid } = useParams();
   const dispatch = useDispatch();
 
-  const fetchModules = async () => {
-    const modules = await coursesClient.findModulesForCourse(cid as string);
+  const fetchModulesForCourse = async () => {
+    const modules = await coursesClient.findModulesForCourse(cid!);
     dispatch(setModules(modules));
   };
 
@@ -33,29 +33,49 @@ export default function Modules() {
     dispatch(addModule(module));
   }
 
+  const addModuleHandler = async () => {
+    const newModule = await coursesClient.createModuleForCourse(cid!, {
+      name: moduleName,
+      course: cid,
+    });
+    console.log("New module")
+    console.log(newModule)
+    dispatch(addModule(newModule));
+    setModuleName("");
+  };
+
+
   const removeModule = async (moduleId: string) => {
+    // Same as deleteModuleHandler from 6.4.2.4 Deleting Modules
     await modulesClient.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
   };
 
   const saveModule = async (module: any) => {
+    console.log("Saving module")
+    console.log(module)
+    // Same as updateModuleHandler from 6.4.2.5 Updating Modules
     await modulesClient.updateModule(module);
     dispatch(updateModule(module));
   };
 
 
   useEffect(() => {
-    fetchModules();
-  }, []);
+    fetchModulesForCourse();
+  }, [cid]);
 
   return (
     <div>
-      <ModulesControls setModuleName={setModuleName} moduleName={moduleName}
-        addModule={() => {
-          createModuleForCourse()
-          // dispatch(addModule({ name: moduleName, course: cid }));
-          // setModuleName("");
-        }} />
+      <ModulesControls
+        setModuleName={setModuleName}
+        moduleName={moduleName}
+        addModule={addModuleHandler}
+      // addModule={() => {
+      //   createModuleForCourse()
+      //   // dispatch(addModule({ name: moduleName, course: cid }));
+      //   // setModuleName("");
+      // }} 
+      />
       <br /><br /><br /><br />
       <ul id="wd-modules" className="list-group rounded-0">
         {modules
@@ -68,9 +88,10 @@ export default function Modules() {
                 {module.editing && (
                   <FormControl className="w-50 d-inline-block"
                     onChange={(e) =>
-                      dispatch(
-                        updateModule({ ...module, name: e.target.value })
-                      )
+                      saveModule({ ...module, name: e.target.value })
+                      // dispatch(
+                      //   updateModule({ ...module, name: e.target.value })
+                      // )
                     }
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
@@ -85,7 +106,7 @@ export default function Modules() {
                     removeModule(moduleId);
                     // dispatch(deleteModule(moduleId));
                   }}
-                  editModule={(moduleId) => {dispatch(editModule(moduleId))}}
+                  editModule={(moduleId) => { dispatch(editModule(moduleId)) }}
                 />
               </div>
               {module.lessons && (

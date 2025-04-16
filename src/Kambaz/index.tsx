@@ -22,9 +22,9 @@ export default function Kambaz() {
             <Route path="/Dashboard" element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
             <Route path="/Courses/:cid/*" element={
               <ProtectedRoute>
-                <CourseProtectedRoute>
+                {/* <CourseProtectedRoute> */}
                   <Courses />
-                </CourseProtectedRoute>
+                {/* </CourseProtectedRoute> */}
               </ProtectedRoute>}
             />
             <Route path="/Calendar" element={<h1>Calendar</h1>} />
